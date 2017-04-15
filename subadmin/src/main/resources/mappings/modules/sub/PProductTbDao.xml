@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sub.dao.PProductTbDao">
+	
+    <sql id="pProductTbColumns">
+		a.id AS "id",
+		a.title AS "title",
+		a.pict_url AS "picturl",
+		a.reserve_price AS "reservePrice",
+		a.zk_final_price AS "zkFinalPrice",
+		a.user_type AS "usertype",
+		a.provcity AS "provcity",
+		a.item_url AS "itemurl",
+		a.nick AS "nick",
+		a.seller_id AS "sellerId",
+		a.volume AS "volume"
+	</sql>
+	
+	<sql id="pProductTbJoins">
+    </sql>
+    
+    <select id="get" resultType="PProductTb">
+		SELECT 
+			<include refid="pProductTbColumns"/>
+		FROM p_product_tb a
+		<include refid="pProductTbJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="PProductTb">
+		SELECT 
+			<include refid="pProductTbColumns"/>
+		FROM p_product_tb a
+	</select>
+	
+	
+</mapper>
