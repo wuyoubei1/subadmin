@@ -16,7 +16,6 @@
         }
 		
 		function onejson(url){
-			alert(url);
 			$.ajax({
 				type:"post",
 				dataType:"jsonp",
@@ -29,7 +28,6 @@
 		}
 		
 		function alljson(url){
-			alert(url);
 			$.ajax({
 				type:"post",
 				dataType:"jsonp",
