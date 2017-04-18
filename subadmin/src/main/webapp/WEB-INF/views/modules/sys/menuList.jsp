@@ -48,7 +48,7 @@
 			</c:forEach>
 			
 			<tr id="1" pId="0">
-					<td nowrap><i class="icon- hide'></i><a href="">123222222</a></td>
+					<td nowrap><a href="">123222222</a></td>
 					<td title="123">3333333</td>
 					<td style="text-align:center;">
 					</td>
@@ -58,7 +58,7 @@
 						<a href="">修改</a>
 					</td>
 				</tr><tr id="11" pId="1">
-					<td nowrap><i class="icon- hide'></i><a href="">123222222</a></td>
+					<td nowrap><a href="">123222222</a></td>
 					<td title="123">3333333</td>
 					<td style="text-align:center;">
 					</td>
