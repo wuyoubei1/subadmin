@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.modules.sub.entity.PProductTb;
 /**
  * 商品表DAO接口
  * @author 邢宇
- * @version 2017-04-17
+ * @version 2017-04-17 
  */
 @MyBatisDao
 public interface PProductTbDao extends CrudDao<PProductTb> {

@@ -34,7 +34,7 @@
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
-			<label class="control-label">商品标题：</label>
+			<label class="control-label">商品标题：</label> 
 			<div class="controls">
 				<form:input path="title" htmlEscape="false" maxlength="255" class="input-xlarge "/>
 			</div>

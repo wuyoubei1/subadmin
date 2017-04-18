@@ -15,7 +15,7 @@ import com.thinkgem.jeesite.modules.sub.dao.PProductTbDao;
 
 /**
  * 商品表Service
- * @author 邢宇
+ * @author 邢宇 
  * @version 2017-04-17
  */
 @Service

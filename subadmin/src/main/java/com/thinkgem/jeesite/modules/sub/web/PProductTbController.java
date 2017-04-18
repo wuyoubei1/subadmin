@@ -30,7 +30,7 @@ import com.thinkgem.jeesite.modules.sub.service.PProductTbService;
 
 /**
  * 商品表Controller
- * @author 邢宇
+ * @author 邢宇 
  * @version 2017-04-17
  */
 @Controller
