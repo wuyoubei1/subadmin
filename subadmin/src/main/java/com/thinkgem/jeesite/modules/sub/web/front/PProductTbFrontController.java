@@ -77,5 +77,41 @@ public class PProductTbFrontController extends BaseController {
 		System.out.println(result);
 		return result;
 	}
+	
+	@RequestMapping("getJson")
+	@ResponseBody
+	public String getJson(HttpServletRequest request,PProductTb pProductTb){
+		String json="";
+		ObjectMapper om=new ObjectMapper();
+		List<PProductTb> list=pProductTbService.findList(pProductTb);
+		try {
+			json=om.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		System.out.println(list);
+		return json;
+	}
+	
+	/**
+	 * 商品筛选接口 需要根据关键字查询商品 条件：关键字key 页面：pageNo
+	 * @param request
+	 * @param pProductTb
+	 * @return
+	 */
+	@RequestMapping("spsx")
+	@ResponseBody
+	public String spsx(HttpServletRequest request,PProductTb pProductTb){
+		String json="";
+		ObjectMapper om=new ObjectMapper();
+		List<PProductTb> list=pProductTbService.findList(pProductTb);
+		try {
+			json=om.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		System.out.println(list);
+		return json;
+	}
 
 }
