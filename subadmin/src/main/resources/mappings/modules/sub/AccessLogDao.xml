@@ -15,7 +15,7 @@
 	<sql id="accessLogJoins">
 	</sql>
     
-	<select id="get" resultType="AccessLog">
+	<select id="get" resultType="com.thinkgem.jeesite.modules.sub.entity.AccessLog">
 		SELECT 
 			<include refid="accessLogColumns"/>
 		FROM access_log a
@@ -23,7 +23,7 @@
 		WHERE a.id = #{id}
 	</select>
 	
-	<select id="findList" resultType="AccessLog">
+	<select id="findList" resultType="com.thinkgem.jeesite.modules.sub.entity.AccessLog">
 		SELECT 
 			<include refid="accessLogColumns"/>
 		FROM access_log a
@@ -40,7 +40,7 @@
 		</choose>
 	</select>
 	
-	<select id="findAllList" resultType="AccessLog">
+	<select id="findAllList" resultType="com.thinkgem.jeesite.modules.sub.entity.AccessLog">
 		SELECT 
 			<include refid="accessLogColumns"/>
 		FROM access_log a
@@ -57,9 +57,8 @@
 		</choose>
 	</select>
 	
-	<insert id="insert">
+	<insert id="insert" parameterType="com.thinkgem.jeesite.modules.sub.entity.AccessLog" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO access_log(
-			id,
 			method,
 			param,
 			mobile,
@@ -67,7 +66,6 @@
 			access_time,
 			remark
 		) VALUES (
-			#{id},
 			#{method},
 			#{param},
 			#{mobile},
@@ -92,5 +90,4 @@
 		DELETE FROM access_log
 		WHERE id = #{id}
 	</update>
-	
 </mapper>

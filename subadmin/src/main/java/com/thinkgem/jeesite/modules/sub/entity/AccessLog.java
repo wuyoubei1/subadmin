@@ -3,6 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.sub.entity;
 
+import java.io.Serializable;
+
 import org.hibernate.validator.constraints.Length;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -12,9 +14,9 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
  * @author xingyu
  * @version 2017-04-20
  */
-public class AccessLog extends DataEntity<AccessLog> {
+public class AccessLog implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	private int id;
 	private String method;		// 访问方法名
 	private String param;		// 访问方法参数
 	private String mobile;		// 访问手机号
@@ -22,12 +24,14 @@ public class AccessLog extends DataEntity<AccessLog> {
 	private String accessTime;		// 时间 yyyy-MM-dd HH:mm:ss  24小时制
 	private String remark;		// 备注
 	
-	public AccessLog() {
-		super();
+
+	
+	public int getId() {
+		return id;
 	}
 
-	public AccessLog(String id){
-		super(id);
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Length(min=0, max=20, message="访问方法名长度必须介于 0 和 20 之间")
@@ -82,6 +86,21 @@ public class AccessLog extends DataEntity<AccessLog> {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public AccessLog(String method, String param, String mobile, String nice, String accessTime, String remark) {
+		super();
+		this.method = method;
+		this.param = param;
+		this.mobile = mobile;
+		this.nice = nice;
+		this.accessTime = accessTime;
+		this.remark = remark;
+	}
+
+	public AccessLog() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 }

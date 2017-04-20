@@ -41,12 +41,10 @@
 	</script>
 </head>
 <body>
-<form action="${ctx}/sub/pTb/spsx" method="post">
-		<input type="hidden" value="num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick" name="fields"/>
+<form action="${ctx}/sub/pTb/spsx?nice='你好'&mobile='18511118888'" method="post">
 		<input type="text" value="女装" name="q"/>
 		<input type="text" value="杭州" name="itemloc"/>
 		<input type="text" value="1" name="pageNo"/>
-		<input type="text" value="20" name="pageSize"/>
 		<input  type="submit" value="测试淘宝"/>
 	</form>
 	<ul class="nav nav-tabs">

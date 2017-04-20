@@ -29,6 +29,7 @@ import com.thinkgem.jeesite.modules.sub.entity.AccessLog;
 import com.thinkgem.jeesite.modules.sub.entity.PProductTb;
 import com.thinkgem.jeesite.modules.sub.service.AccessLogService;
 import com.thinkgem.jeesite.modules.sub.service.PProductTbService;
+import com.thinkgem.jeesite.modules.sub.util.DateUtil;
 
 /**
  * 商品表Controller
@@ -115,28 +116,34 @@ public class PProductTbFrontController extends BaseController {
 	@RequestMapping("spsx")
 	@ResponseBody
 	public String spsx(HttpServletRequest request, TbkItemGetRequest req) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e3) {
+			e3.printStackTrace();
+		}
 		String json = "";
 		ObjectMapper om = new ObjectMapper();
 		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
-		req.setFields(
-				"num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
+		req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
 		req.setPageSize(Long.parseLong("20"));
 		TbkItemGetResponse rsp;
 		AccessLog accessLog = new AccessLog();
+		accessLog.setAccessTime(DateUtil.getNow());
+		accessLog.setMethod(this.getClass().getName());
+		accessLog.setNice(request.getParameter("nice"));
+		accessLog.setMobile(request.getParameter("mobile"));
+		accessLog.setRemark("测试数据");
+		accessLog.setParam(request.toString());
 		accessLogService.logForTable(request, accessLog);
 		try {
-			request.setCharacterEncoding("UTF-8");
 			rsp = client.execute(req);
 			System.out.println(rsp.getBody());
 			json = om.writeValueAsString(rsp);
-		} catch (UnsupportedEncodingException e2) {
-			e2.printStackTrace();
 		} catch (ApiException e1) {
 			e1.printStackTrace();
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-
 		return json;
 	}
 
