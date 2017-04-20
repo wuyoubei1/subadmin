@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sub.dao.AccessLogDao">
+    
+	<sql id="accessLogColumns">
+		a.id AS "id",
+		a.method AS "method",
+		a.param AS "param",
+		a.mobile AS "mobile",
+		a.nice AS "nice",
+		a.access_time AS "accessTime",
+		a.remark AS "remark"
+	</sql>
+	
+	<sql id="accessLogJoins">
+	</sql>
+    
+	<select id="get" resultType="AccessLog">
+		SELECT 
+			<include refid="accessLogColumns"/>
+		FROM access_log a
+		<include refid="accessLogJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="AccessLog">
+		SELECT 
+			<include refid="accessLogColumns"/>
+		FROM access_log a
+		<include refid="accessLogJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="AccessLog">
+		SELECT 
+			<include refid="accessLogColumns"/>
+		FROM access_log a
+		<include refid="accessLogJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO access_log(
+			id,
+			method,
+			param,
+			mobile,
+			nice,
+			access_time,
+			remark
+		) VALUES (
+			#{id},
+			#{method},
+			#{param},
+			#{mobile},
+			#{nice},
+			#{accessTime},
+			#{remark}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE access_log SET 	
+			method = #{method},
+			param = #{param},
+			mobile = #{mobile},
+			nice = #{nice},
+			access_time = #{accessTime},
+			remark = #{remark}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM access_log
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
