@@ -34,9 +34,14 @@
 	</script>
 </head>
 <body>
-	<input  type="button" value="一条数据" onclick="getOne()"/>
-	<input type ="button" value="全部数据" onclick="getAll()"> 
-	<input type="hidden" id="one" value="${ctx}/sub/pProductTb/get?id=111">
-	<input type="hidden" id="all" value="${ctx}/sub/pProductTb/list">
+	<form action="${ctx}/sub/pTb/spsx">
+		<input type="hidden" value="num_iid,title,pict_url,small_images,reserve_price,zk_final_price,
+		user_type,provcity,item_url,seller_id,volume,nick" id="req.fields"/>
+		<input type="text" value="女装" id="req.q"/>
+		<input type="text" value="杭州" id="req.itemloc"/>
+		<input type="text" value="1" id="req.page_no"/>
+		<input type="text" value="20" id="req.page_size"/>
+		<input  type="submit" value="测试淘宝"/>
+	</form>
 </body>
 </html>

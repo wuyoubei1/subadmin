@@ -3,6 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.sub.web.front;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taobao.api.ApiException;
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.TbkItemGetRequest;
+import com.taobao.api.response.TbkItemGetResponse;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sub.entity.PProductTb;
 import com.thinkgem.jeesite.modules.sub.service.PProductTbService;
@@ -25,8 +31,14 @@ import com.thinkgem.jeesite.modules.sub.service.PProductTbService;
  * @version 2017-04-17
  */
 @Controller
-@RequestMapping(value = "${frontPath}/sub/pProductTb")
+@RequestMapping(value = "${frontPath}/sub/pTb")
 public class PProductTbFrontController extends BaseController {
+	
+	public static String url="http://gw.api.taobao.com/router/rest";
+	
+	public static String appkey="23760845";
+	
+	public static String secret="e5cf5879a13d0c453c3bb1a9bff4b861";
 
 	@Autowired
 	private PProductTbService pProductTbService;
@@ -92,16 +104,24 @@ public class PProductTbFrontController extends BaseController {
 	 */
 	@RequestMapping("spsx")
 	@ResponseBody
-	public String spsx(HttpServletRequest request,PProductTb pProductTb){
+	public String spsx(HttpServletRequest request,TbkItemGetRequest req){
 		String json="";
 		ObjectMapper om=new ObjectMapper();
-		List<PProductTb> list=pProductTbService.findList(pProductTb);
+		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+		TbkItemGetResponse rsp;
 		try {
-			json=om.writeValueAsString(list);
-		} catch (JsonProcessingException e) {
+			request.setCharacterEncoding("UTF-8");
+			rsp = client.execute(req);
+			System.out.println(rsp.getBody());
+			json=om.writeValueAsString(rsp);
+		} catch (UnsupportedEncodingException e2) {
+			e2.printStackTrace();
+		} catch (ApiException e1) {
+			e1.printStackTrace();
+		}catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.println(list);
+
 		return json;
 	}
 
