@@ -38,7 +38,7 @@ import com.thinkgem.jeesite.modules.sub.util.DateUtil;
  * @version 2017-04-17
  */
 @Controller
-@RequestMapping(value = "${adminPath}/sub/pTb")
+@RequestMapping(value = "${frontPath}/sub/pTb")
 public class PProductTbFrontController extends BaseController {
 
 	public static String url = "http://gw.api.taobao.com/router/rest";
