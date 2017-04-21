@@ -41,7 +41,7 @@
 	</script>
 </head>
 <body>
-<form action="${ctx}/sub/pTb/spsx?nice='你好'&mobile='18511118888'" method="post">
+<form action="${ctx}/sub/pTb/spsx?nice=你好&mobile=18511118888" method="post">
 		<input type="text" value="女装" name="q"/>
 		<input type="text" value="杭州" name="itemloc"/>
 		<input type="text" value="1" name="pageNo"/>

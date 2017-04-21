@@ -130,7 +130,13 @@ public class PProductTbFrontController extends BaseController {
 		AccessLog accessLog = new AccessLog();
 		accessLog.setAccessTime(DateUtil.getNow());
 		accessLog.setMethod(this.getClass().getName());
-		accessLog.setNice(request.getParameter("nice"));
+		try {
+			accessLog.setNice(new String(request.getParameter("nice").getBytes("iso-8859-1"),"utf-8"));
+		} catch (UnsupportedEncodingException e2) {
+			e2.printStackTrace();
+		}
+		System.out.println(request.getCharacterEncoding());
+		System.out.println(accessLog.getNice());
 		accessLog.setMobile(request.getParameter("mobile"));
 		accessLog.setRemark("测试数据");
 		accessLog.setParam(request.toString());
