@@ -9,6 +9,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,39 +26,41 @@ import com.thinkgem.jeesite.modules.sub.entity.AccessLog;
  */
 @Service
 @Transactional(readOnly = true)
-public class AccessLogService extends CrudService<AccessLogDao, AccessLog> {
+public class AccessLogService {
 
+	@Autowired
+	private AccessLogDao accessLogDao;
 	public AccessLog get(String id) {
-		return super.get(id);
+		return accessLogDao.get(id);
 	}
 	
 	public List<AccessLog> findList(AccessLog accessLog) {
-		return super.findList(accessLog);
+		return accessLogDao.findList(accessLog);
 	}
 	
 	public Page<AccessLog> findPage(Page<AccessLog> page, AccessLog accessLog) {
-		return super.findPage(page, accessLog);
+		return accessLogDao.findPage(page, accessLog);
 	}
 	
 	@Transactional(readOnly = false)
-	public void save(AccessLog accessLog) {
-		super.save(accessLog);
+	public void insert(AccessLog accessLog) {
+		accessLogDao.insert(accessLog);
 	}
 	
 	@Transactional(readOnly = false)
 	public void delete(AccessLog accessLog) {
-		super.delete(accessLog);
+		accessLogDao.delete(accessLog);
 	}
 	/**
 	 * 日志
 	 * @param request
 	 * @param accessLog
 	 */
-	public void logForTable(HttpServletRequest request,AccessLog accessLog){
+	public void logForTable(HttpServletRequest request,@Param("accessLog") AccessLog accessLog){
 		HttpSession session = request.getSession();
 		List <AccessLog> list=(List<AccessLog>) session.getAttribute("logList");
 		if(list!=null){
-			if(list.size()>=20){
+			if(list.size()>=1){
 				this.logSave(list);
 				list.clear();
 			}
@@ -72,8 +76,9 @@ public class AccessLogService extends CrudService<AccessLogDao, AccessLog> {
 			new Thread(){
 				@Override
 				public void run() {
+					System.out.println("日志入库开始");
 					for (AccessLog accessLog : list) {
-						save(accessLog);
+						insert(accessLog);
 					}
 				}
 			}.start();
