@@ -1,15 +1,9 @@
-/**
- * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package com.thinkgem.jeesite.modules.sub.web.front;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +17,9 @@ import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.TbkItemGetRequest;
+import com.taobao.api.request.TbkItemInfoGetRequest;
 import com.taobao.api.response.TbkItemGetResponse;
+import com.taobao.api.response.TbkItemInfoGetResponse;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sub.entity.AccessLog;
 import com.thinkgem.jeesite.modules.sub.entity.PProductTb;
@@ -150,6 +146,56 @@ public class PProductTbFrontController extends BaseController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
+		return json;
+	}
+	
+	/**
+	 *商品详情
+	 * wuyb
+	 * @param request
+	 * @param pProductTb
+	 * @return
+	 */
+	@RequestMapping("dt")
+	@ResponseBody
+	public String detail(HttpServletRequest request, TbkItemInfoGetRequest req) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e3) {
+			e3.printStackTrace();
+		}
+		
+		ObjectMapper om = new ObjectMapper();
+		String json = "";
+		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+		//req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
+		req.setPlatform(1L);
+		try {
+			TbkItemInfoGetResponse rsp = client.execute(req);
+			System.out.println(rsp.getBody());
+			json = om.writeValueAsString(rsp);
+		} catch (ApiException e1) {
+			e1.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		AccessLog accessLog = new AccessLog();
+		accessLog.setAccessTime(DateUtil.getNow());
+		accessLog.setMethod(this.getClass().getName());
+		try {
+			if(null!=request.getParameter("nice")){
+				accessLog.setNice(new String(request.getParameter("nice").getBytes("iso-8859-1"),"utf-8"));
+			}
+		} catch (UnsupportedEncodingException e2) {
+			e2.printStackTrace();
+		}
+		System.out.println(request.getCharacterEncoding());
+		System.out.println(accessLog.getNice());
+		accessLog.setMobile(request.getParameter("mobile"));
+		accessLog.setRemark("商品详情");
+		accessLog.setParam(request.toString());
+		accessLogService.logForTable(request, accessLog);
+		
 		return json;
 	}
 
