@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sub.dao.PJzdyDao">
+    
+	<sql id="pJzdyColumns">
+		a.id AS "id",
+		a.type AS "type",
+		a.content AS "content",
+		a.price AS "price",
+		a.mobile AS "mobile",
+		a.create_time AS "createTime",
+		a.tx_time AS "txTime",
+		a.goods_id AS "goodsId"
+	</sql>
+	
+	<sql id="pJzdyJoins">
+	</sql>
+    
+	<select id="get" resultType="com.thinkgem.jeesite.modules.sub.entity.PJzdy">
+		SELECT 
+			<include refid="pJzdyColumns"/>
+		FROM p_jzdy a
+		<include refid="pJzdyJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="com.thinkgem.jeesite.modules.sub.entity.PJzdy">
+		SELECT 
+			<include refid="pJzdyColumns"/>
+		FROM p_jzdy a
+	</select>
+	
+	<insert id="insert" parameterType="com.thinkgem.jeesite.modules.sub.entity.PJzdy" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO p_jzdy(
+			type,
+			content,
+			price,
+			mobile,
+			create_time,
+			tx_time,
+			goods_id
+		) VALUES (
+			#{type},
+			#{content},
+			#{price},
+			#{mobile},
+			#{createTime},
+			#{txTime},
+			#{goodsId}
+		)
+	</insert>
+	
+	<update id="delete">
+		DELETE FROM p_jzdy
+		WHERE id = #{id}
+	</update>
+</mapper>

@@ -45,8 +45,23 @@ public class PShortMsgService {
 		}
 		return code.toString();
 	}
+	/**
+	 * 验证码验证
+	 * @param msg
+	 * @param mobile
+	 * @return
+	 */
+	public String check(PShortMsg shortMsg) {
+		List<PShortMsg> list=pShortMsgDao.check(shortMsg);
+		if(list!=null&&list.size()>0){
+			return list.get(0).getSendTime();
+		}else{
+			return "";
+		}
+	}
 	public static void main(String[] args) {
 		PShortMsgService s=new PShortMsgService();
 		s.createCode();
 	}
+
 }

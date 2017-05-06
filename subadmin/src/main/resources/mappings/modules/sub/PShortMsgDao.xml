@@ -45,5 +45,7 @@
 			#{status}
 		)
 	</insert>
-	
+	<select id="check" resultType="com.thinkgem.jeesite.modules.sub.entity.PShortMsg">
+		select <include refid="pShortMsgColumns"/> from p_shortmsg a where a.msg=#{msg} and a.mobile=#{mobile}
+	</select>
 </mapper>

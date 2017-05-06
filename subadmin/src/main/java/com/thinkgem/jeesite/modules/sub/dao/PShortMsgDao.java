@@ -20,4 +20,6 @@ public interface PShortMsgDao  {
 
 	public List<PShortMsg> findList(PShortMsg pShortMsg);
 
+	public List<PShortMsg> check(PShortMsg pShortMsg);
+
 }

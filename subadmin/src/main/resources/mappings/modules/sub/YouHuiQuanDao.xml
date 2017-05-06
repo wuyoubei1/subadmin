@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sub.dao.YouhuiQuanDao">
+
+	<sql id="youHuiQuanColumns">
+		a.goods_id as "goodsId",
+		a.title as "title",
+		a.ditle as "ditle",
+		a.pic as "pic",
+		a.orgPrice as "orgPrice",
+		a.price as "price",
+		a.isTmall as "isTmall",
+		a.salesNum as "salesNum",
+		a.dsr as "dsr",
+		a.sellerID as "sellerID",
+		a.introduce as "introduce",
+		a.quanPrice as "quanPrice",
+		a.quanCondition as "quanCondition",
+		a.quanLink as "quanLink",
+		a.qQuanMLink as "qQuanMLink",
+		a.aliClick as "aliClick",
+		a.type as "type",
+		a.quan_surplus as "quanSurplus",
+		a.quan_time as "quanTime"
+	</sql>
+	<select id="getByGoodsId" resultType="com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan">
+		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where a.goods_id = #{goodsId}
+	</select>
+</mapper>
