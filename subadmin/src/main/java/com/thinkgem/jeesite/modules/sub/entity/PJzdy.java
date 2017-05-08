@@ -18,6 +18,14 @@ public class PJzdy implements Serializable {
 	private String createTime;
 	private String txTime;
 	private BigInteger goodsId;
+	private double priceMax;
+	
+	public double getPriceMax() {
+		return priceMax;
+	}
+	public void setPriceMax(double priceMax) {
+		this.priceMax = priceMax;
+	}
 	public int getId() {
 		return id;
 	}

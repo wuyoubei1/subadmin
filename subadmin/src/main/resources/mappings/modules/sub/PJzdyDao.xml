@@ -10,7 +10,8 @@
 		a.mobile AS "mobile",
 		a.create_time AS "createTime",
 		a.tx_time AS "txTime",
-		a.goods_id AS "goodsId"
+		a.goods_id AS "goodsId",
+		a.price_max AS "priceMax"
 	</sql>
 	
 	<sql id="pJzdyJoins">
@@ -38,7 +39,8 @@
 			mobile,
 			create_time,
 			tx_time,
-			goods_id
+			goods_id,
+			price_max
 		) VALUES (
 			#{type},
 			#{content},
@@ -46,7 +48,8 @@
 			#{mobile},
 			#{createTime},
 			#{txTime},
-			#{goodsId}
+			#{goodsId},
+			#{priceMax}
 		)
 	</insert>
 	
