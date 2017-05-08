@@ -44,8 +44,8 @@ public class PJzdyController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		pJzdy.setCreateTime(DateUtils.getNow());
-		pJzdy.setTxTime(DateUtils.getNow());
+		pJzdy.setCreateTime(DateUtils.getDate());
+		pJzdy.setTxTime(DateUtils.getDate());
 		pJzdyService.insert(pJzdy);
 		return "0";
 	}

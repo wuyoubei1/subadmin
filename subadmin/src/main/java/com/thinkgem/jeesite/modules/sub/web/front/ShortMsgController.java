@@ -80,7 +80,7 @@ public static String url="http://gw.api.taobao.com/router/rest";
 		psm.setMobile(mobile);
 		psm.setMsg(msg);
 		psm.setType(0);
-		psm.setSendTime(DateUtils.getNow());
+		psm.setSendTime(DateUtils.getDate());
 		try {
 			rsp = client.execute(req);
 			System.out.println(rsp.getBody());
@@ -115,7 +115,7 @@ public static String url="http://gw.api.taobao.com/router/rest";
 		String datetime=msgService.check(shortMsg);
 		if(datetime!=null){
 			Date now=new Date();
-			long time=(now.getTime()-DateUtils.toDate(datetime).getTime())/1000;
+			long time=(now.getTime()-DateUtils.parseDate(datetime).getTime())/1000;
 			if(time>300){
 				data="0";
 			}else{

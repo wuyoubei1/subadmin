@@ -25,12 +25,12 @@ import com.taobao.api.response.JuItemsSearchResponse;
 import com.taobao.api.response.TbkItemGetResponse;
 import com.taobao.api.response.TbkItemInfoGetResponse;
 import com.taobao.api.response.TbkJuTqgGetResponse;
+import com.thinkgem.jeesite.common.utils.DateUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sub.entity.AccessLog;
 import com.thinkgem.jeesite.modules.sub.entity.PProductTb;
 import com.thinkgem.jeesite.modules.sub.service.AccessLogService;
 import com.thinkgem.jeesite.modules.sub.service.PProductTbService;
-import com.thinkgem.jeesite.modules.sub.util.DateUtil;
 
 /**
  * 商品表Controller
@@ -134,7 +134,7 @@ public class PProductTbFrontController extends BaseController {
 		req.setPageSize(Long.parseLong("20"));
 		TbkItemGetResponse rsp;
 		AccessLog accessLog = new AccessLog();
-		accessLog.setAccessTime(DateUtil.getNow());
+		accessLog.setAccessTime(DateUtils.getDate());
 		accessLog.setMethod(this.getClass().getName());
 		try {
 			if(null!=request.getParameter("nice")){
@@ -259,7 +259,7 @@ public class PProductTbFrontController extends BaseController {
 	 */
 	public void logRecord(HttpServletRequest request){
 		AccessLog accessLog = new AccessLog();
-		accessLog.setAccessTime(DateUtil.getNow());
+		accessLog.setAccessTime(DateUtils.getDate());
 		accessLog.setMethod(this.getClass().getName());
 		try {
 			if(null!=request.getParameter("nice")){
