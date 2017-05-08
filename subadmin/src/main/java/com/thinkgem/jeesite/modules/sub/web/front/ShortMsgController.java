@@ -17,10 +17,10 @@ import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
 import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
+import com.thinkgem.jeesite.common.utils.DateUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.sub.entity.PShortMsg;
 import com.thinkgem.jeesite.modules.sub.service.PShortMsgService;
-import com.thinkgem.jeesite.modules.sub.util.DateUtil;
 
 /**
  * 短信验证码+短信提醒
@@ -80,7 +80,7 @@ public static String url="http://gw.api.taobao.com/router/rest";
 		psm.setMobile(mobile);
 		psm.setMsg(msg);
 		psm.setType(0);
-		psm.setSendTime(DateUtil.getNow());
+		psm.setSendTime(DateUtils.getNow());
 		try {
 			rsp = client.execute(req);
 			System.out.println(rsp.getBody());
@@ -115,7 +115,7 @@ public static String url="http://gw.api.taobao.com/router/rest";
 		String datetime=msgService.check(shortMsg);
 		if(datetime!=null){
 			Date now=new Date();
-			long time=(now.getTime()-DateUtil.toDate(datetime).getTime())/1000;
+			long time=(now.getTime()-DateUtils.toDate(datetime).getTime())/1000;
 			if(time>300){
 				data="0";
 			}else{

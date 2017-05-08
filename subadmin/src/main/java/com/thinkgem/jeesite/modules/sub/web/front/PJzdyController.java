@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thinkgem.jeesite.common.utils.DateUtils;
 import com.thinkgem.jeesite.modules.sub.entity.PJzdy;
 import com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan;
 import com.thinkgem.jeesite.modules.sub.service.PJzdyService;
-import com.thinkgem.jeesite.modules.sub.util.DateUtil;
 
 /**
 * 
@@ -44,8 +44,8 @@ public class PJzdyController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		pJzdy.setCreateTime(DateUtil.getNow());
-		pJzdy.setTxTime(DateUtil.getNow());
+		pJzdy.setCreateTime(DateUtils.getNow());
+		pJzdy.setTxTime(DateUtils.getNow());
 		pJzdyService.insert(pJzdy);
 		return "0";
 	}
