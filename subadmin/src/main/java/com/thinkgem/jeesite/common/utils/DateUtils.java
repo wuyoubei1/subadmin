@@ -4,6 +4,7 @@
 package com.thinkgem.jeesite.common.utils;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -113,6 +114,17 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 		}
 	}
 
+	public static Date str2Date(String str){
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//小写的mm表示的是分钟  
+		java.util.Date date=null;
+		try {
+			date = sdf.parse(str);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}  
+		return date;
+	}
+	
 	/**
 	 * 获取过去的天数
 	 * @param date

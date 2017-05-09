@@ -1,5 +1,6 @@
 package com.thinkgem.jeesite.modules.sub.web.front;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -80,7 +81,7 @@ public static String url="http://gw.api.taobao.com/router/rest";
 		psm.setMobile(mobile);
 		psm.setMsg(msg);
 		psm.setType(0);
-		psm.setSendTime(DateUtils.getDate());
+		psm.setSendTime(DateUtils.getDate("yyyy-MM-dd HH:mm:ss"));
 		try {
 			rsp = client.execute(req);
 			System.out.println(rsp.getBody());
@@ -113,14 +114,20 @@ public static String url="http://gw.api.taobao.com/router/rest";
 		shortMsg.setMobile(mobile);
 		shortMsg.setMsg(msg);
 		String datetime=msgService.check(shortMsg);
-		if(datetime!=null){
+		if(null!=datetime &&!"".equals(datetime)){
 			Date now=new Date();
-			long time=(now.getTime()-DateUtils.parseDate(datetime).getTime())/1000;
-			if(time>300){
-				data="0";
-			}else{
-				data="1";
+			long time;
+			try {
+				time = (now.getTime()-DateUtils.str2Date(datetime).getTime())/1000;
+				if(time>300){
+					data="0";
+				}else{
+					data="1";
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+			
 		}else{
 			data="2";
 		}
