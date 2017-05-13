@@ -1,10 +1,8 @@
 package com.thinkgem.jeesite.modules.sub.web.front;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,24 +33,14 @@ public class YhcxController {
 	 */
 	@RequestMapping(value="data")
 	@ResponseBody
-	public String getData(@RequestParam String key,@RequestParam String page,HttpServletRequest request){
-		try {
-			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		}
-		if(page==null||page==""||"0".equals(page)){
+	public String getData(@RequestParam String key,@RequestParam String page){
+		if(page==null||page==""||Integer.parseInt(page)<=0){
 			page=1+"";
 		}
 		List<YouHuiQuan> list =new ArrayList<YouHuiQuan>();
 		ObjectMapper om=new ObjectMapper();
 		String data="";
 		if(null!=key&&!"".equals(key)){//没有关键字或id
-			try {
-				key=new String(key.getBytes("iso-8859-1"),"utf-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
 			if(key.matches("^[0-9]*[1-9][0-9]*$")&&15>key.length()&&key.length()>8){//为数字并且位数小于15大于8，认为是商品id
 				list=youHuiQuanService.getByGoodsId(key);
 			}else{
@@ -60,11 +48,12 @@ public class YhcxController {
 				list=youHuiQuanService.getListByTitle(key, page);
 			}
 		}else{
-			list=youHuiQuanService.getList(Integer.parseInt(page));
+			list=youHuiQuanService.getList(page);
 		}
 		try {
 			data=om.writeValueAsString(list);
 		} catch (JsonProcessingException e) {
+			System.out.println(e);
 			e.printStackTrace();
 		}
 		return data;
