@@ -19,12 +19,16 @@ public class LimitEntity {
 		return page;
 	}
 	public void setPage(int page) {
-		this.page = page;
+		this.page = (page-1)*20;
 	}
 	public LimitEntity(String title, int page) {
 		super();
 		this.title = title;
 		this.page = (page-1)*20;
+	}
+	public LimitEntity() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 }
