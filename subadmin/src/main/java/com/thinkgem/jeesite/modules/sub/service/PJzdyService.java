@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thinkgem.jeesite.modules.sub.dao.PJzdyDao;
-import com.thinkgem.jeesite.modules.sub.dao.YouhuiQuanDao;
+import com.thinkgem.jeesite.modules.sub.dao.YouHuiQuanDao;
 import com.thinkgem.jeesite.modules.sub.entity.PJzdy;
 import com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan;
 
@@ -22,7 +22,7 @@ public class PJzdyService {
 	private PJzdyDao pJzdyDao;
 	
 	@Autowired
-	private YouhuiQuanDao quanDao;
+	private YouHuiQuanDao quanDao;
 	public void insert(PJzdy pJzdy){
 		pJzdyDao.insert(pJzdy);
 	}
