@@ -24,14 +24,14 @@
 		a.quan_time as "quanTime"
 	</sql>
 	<select id="getByGoodsId" resultType="com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan">
-		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where a.goods_id = #{goodsId}
+		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where a.goods_id = #{goodsId} 
 	</select>
 	
 	<select id="getListByTitle" resultType="com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan" parameterType="com.thinkgem.jeesite.modules.sub.entity.LimitEntity">
-		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where LOCATE(#{title},a.title)>0 LIMIT #{page},20
+		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where LOCATE(#{title},a.title)>0 and a.quan_surplus>5 LIMIT #{page},20
 	</select>
 	<!-- 获取列表数据 -->
 	<select id="getList" resultType="com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan" parameterType="com.thinkgem.jeesite.modules.sub.entity.LimitEntity">
-		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a LIMIT #{page},20
+		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where a.quan_surplus>5 LIMIT #{page},20
 	</select>
 </mapper>
