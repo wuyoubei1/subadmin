@@ -18,7 +18,7 @@ public interface YouHuiQuanDao {
 	public List<YouHuiQuan> getByGoodsId(String goodsId);
 	
 	/***获取列表数据***/
-	public List<YouHuiQuan> getList(int page);
+	public List<YouHuiQuan> getList(LimitEntity limit);
 	
 	public List<YouHuiQuan> getListByTitle(LimitEntity limit);
 }

@@ -31,7 +31,7 @@
 		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where LOCATE(#{title},a.title)>0 LIMIT #{page},20
 	</select>
 	<!-- 获取列表数据 -->
-	<select id="getList" resultType="com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan">
+	<select id="getList" resultType="com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan" parameterType="com.thinkgem.jeesite.modules.sub.entity.LimitEntity">
 		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a LIMIT #{page},20
 	</select>
 </mapper>
