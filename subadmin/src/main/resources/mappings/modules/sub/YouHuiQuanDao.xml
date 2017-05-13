@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.thinkgem.jeesite.modules.sub.dao.YouhuiQuanDao">
+<mapper namespace="com.thinkgem.jeesite.modules.sub.dao.YouHuiQuanDao">
 
 	<sql id="youHuiQuanColumns">
 		a.goods_id as "goodsId",
@@ -25,5 +25,13 @@
 	</sql>
 	<select id="getByGoodsId" resultType="com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan">
 		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where a.goods_id = #{goodsId}
+	</select>
+	
+	<select id="getListByTitle" resultType="com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan" parameterType="com.thinkgem.jeesite.modules.sub.entity.LimitEntity">
+		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where LOCATE(#{title},a.title)>0 LIMIT #{page},20
+	</select>
+	<!-- 获取列表数据 -->
+	<select id="getList" resultType="com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan">
+		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a LIMIT #{page},20
 	</select>
 </mapper>
