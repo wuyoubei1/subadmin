@@ -19,8 +19,10 @@ public class YouHuiQuanService {
 
 	@Autowired
 	private YouHuiQuanDao youHuiQuanDao;
-	public List<YouHuiQuan> getList(int page){
-		return youHuiQuanDao.getList(page);
+	public List<YouHuiQuan> getList(String page){
+		LimitEntity le=new LimitEntity();
+		le.setPage(Integer.parseInt(page));
+		return youHuiQuanDao.getList(le);
 	}
 	
 	public List<YouHuiQuan> getByGoodsId(String goodsId){
