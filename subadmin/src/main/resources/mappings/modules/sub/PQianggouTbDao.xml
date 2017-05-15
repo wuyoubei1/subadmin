@@ -12,7 +12,7 @@
 		a.start_time AS "starttime",
 		a.end_time AS "endtime",
 		a.sold_num AS "soldNum",
-		a.reserve_price AS "resercePrice",
+		a.reserve_price AS "reservePrice",
 		a.pic_url AS "picUrl",
 		a.type AS "type",
 		a.num_iid AS "numiid"
