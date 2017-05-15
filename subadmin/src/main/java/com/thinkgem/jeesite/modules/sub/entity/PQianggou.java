@@ -15,7 +15,7 @@ public class PQianggou implements  Serializable{
 	private BigInteger id;
 	private String title;		
 	private String totalAmount;		
-	private String click_url;		
+	private String clickUrl;		
 	private String categoryName;		
 	private String zkFinalPrice;		
 	private String endTime;		
@@ -36,12 +36,6 @@ public class PQianggou implements  Serializable{
 	}
 	public void setTotalAmount(String totalAmount) {
 		this.totalAmount = totalAmount;
-	}
-	public String getClick_url() {
-		return click_url;
-	}
-	public void setClick_url(String click_url) {
-		this.click_url = click_url;
 	}
 	public String getCategoryName() {
 		return categoryName;
@@ -99,19 +93,25 @@ public class PQianggou implements  Serializable{
 	}
 	
 	
+	public String getClickUrl() {
+		return clickUrl;
+	}
+	public void setClickUrl(String clickUrl) {
+		this.clickUrl = clickUrl;
+	}
 	public BigInteger getId() {
 		return id;
 	}
 	public void setId(BigInteger id) {
 		this.id = id;
 	}
-	public PQianggou(String title, String totalAmount, String click_url, String categoryName, String zkFinalPrice,
+	public PQianggou(String title, String totalAmount, String clickUrl, String categoryName, String zkFinalPrice,
 			String endTime, int soldNum, String startTime, String reservePrice, String picUrl, int type,
 			BigInteger numiid) {
 		super();
 		this.title = title;
 		this.totalAmount = totalAmount;
-		this.click_url = click_url;
+		this.clickUrl = clickUrl;
 		this.categoryName = categoryName;
 		this.zkFinalPrice = zkFinalPrice;
 		this.endTime = endTime;
@@ -124,7 +124,6 @@ public class PQianggou implements  Serializable{
 	}
 	public PQianggou() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 }

@@ -26,6 +26,12 @@ public class PQianggouController {
 	@Autowired
 	private PQianggouService pQianggouService;
 	
+	/**
+	 * 商品详情 传入key为id时，查询商品详情
+	 * @param key
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping(value="data")
 	@ResponseBody
 	public String getData(@RequestParam String key,@RequestParam String page){
