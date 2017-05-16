@@ -17,6 +17,7 @@ import com.thinkgem.jeesite.common.utils.DateUtils;
 import com.thinkgem.jeesite.modules.sub.entity.PJzdy;
 import com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan;
 import com.thinkgem.jeesite.modules.sub.service.PJzdyService;
+import com.thinkgem.jeesite.modules.sub.util.TestTKJDJob;
 
 /**
 * 
@@ -70,5 +71,18 @@ public class PJzdyController {
 		}
 		return data;
 	}
-	
+	/**
+	 * 根据短连接获取商品id
+	 * @param url
+	 * @return
+	 */
+	@RequestMapping(value="url")
+	@ResponseBody
+	public String getLongUrl(@RequestParam String url){
+		String id="";
+		if(url!=null&&!"".equals(url)){
+			id=TestTKJDJob.synJob(url);
+		}
+		return id;
+	}
 }

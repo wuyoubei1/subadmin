@@ -42,7 +42,7 @@ import com.thinkgem.jeesite.modules.sub.service.PProductTbService;
 @RequestMapping(value = "${frontPath}/sub/pTb")
 public class PProductTbFrontController extends BaseController {
 
-	public static String url="http://gw.api.taobao.com/router/rest";
+	public static String url="http://gw.api.taobao.com/router/rest"; 
 	
 	public static String appkey="23760845";
 	
