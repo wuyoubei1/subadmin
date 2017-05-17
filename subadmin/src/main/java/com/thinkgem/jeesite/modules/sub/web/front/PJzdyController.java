@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taobao.api.ApiException;
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.TbkItemInfoGetRequest;
+import com.taobao.api.response.TbkItemInfoGetResponse;
 import com.thinkgem.jeesite.common.utils.DateUtils;
 import com.thinkgem.jeesite.modules.sub.entity.PJzdy;
 import com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan;
@@ -28,6 +33,15 @@ import com.thinkgem.jeesite.modules.sub.util.TestTKJDJob;
 @RequestMapping(value="${frontPath}/sub/jzdy")
 public class PJzdyController {
 
+	public static String url="http://gw.api.taobao.com/router/rest"; 
+	
+	public static String appkey="23760845";
+	
+	public static String secret="e5cf5879a13d0c453c3bb1a9bff4b861";
+	
+	public static Long adzoneId=80460157L;
+	
+	public static String pid="mm_10221473_23986300_80460157";
 	@Autowired
 	private PJzdyService pJzdyService;
 	
@@ -66,6 +80,20 @@ public class PJzdyController {
 			try {
 				data=om.writeValueAsString(list);
 			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+		}else{
+			TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+			TbkItemInfoGetRequest req = new TbkItemInfoGetRequest();
+			req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,volume");
+			req.setPlatform(1L);
+			req.setNumIids(goodsId);
+			TbkItemInfoGetResponse rsp;
+			try {
+				rsp = client.execute(req);
+				System.out.println(rsp.getBody());
+				data=rsp.getBody().substring(rsp.getBody().indexOf("["),rsp.getBody().lastIndexOf("]")+1);
+			} catch (ApiException e) {
 				e.printStackTrace();
 			}
 		}
