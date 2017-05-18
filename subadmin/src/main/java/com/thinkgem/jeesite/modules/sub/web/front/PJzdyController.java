@@ -75,7 +75,7 @@ public class PJzdyController {
 	public String goodsById(@RequestParam String goodsId){
 		List<YouHuiQuan> list=pJzdyService.getGoods(goodsId);
 		ObjectMapper om=new ObjectMapper();
-		String data="";
+		String data="[{\"goodsId\":\"\"}]";
 		if(list!=null&&list.size()>0){
 			try {
 				data=om.writeValueAsString(list);
@@ -92,7 +92,9 @@ public class PJzdyController {
 			try {
 				rsp = client.execute(req);
 				System.out.println(rsp.getBody());
-				data=rsp.getBody().substring(rsp.getBody().indexOf("["),rsp.getBody().lastIndexOf("]")+1);
+				if(rsp.getBody().indexOf("[")>0){
+					data=rsp.getBody().substring(rsp.getBody().indexOf("["),rsp.getBody().lastIndexOf("]")+1);
+				}
 			} catch (ApiException e) {
 				e.printStackTrace();
 			}
