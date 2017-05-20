@@ -34,9 +34,12 @@ public class PQianggouController {
 	 */
 	@RequestMapping(value="data")
 	@ResponseBody
-	public String getData(@RequestParam String key,@RequestParam String page){
+	public String getData(@RequestParam String key,@RequestParam String page, Integer pageSize){
 		if(page==null||page.equals("")||Integer.parseInt(page)<=0){
 			page="1";
+		}
+		if(null==pageSize){
+			pageSize=20;
 		}
 		String data="";
 		ObjectMapper om=new ObjectMapper();
@@ -48,7 +51,7 @@ public class PQianggouController {
 				list=pQianggouService.findListByTitle(key, page);
 			}
 		}else{
-			list=pQianggouService.findList(page);
+			list=pQianggouService.findList(page,pageSize);
 		}
 		try {
 			data=om.writeValueAsString(list);

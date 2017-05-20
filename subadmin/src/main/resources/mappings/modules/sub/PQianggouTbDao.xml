@@ -30,7 +30,7 @@
 	<select id="findList" resultType="com.thinkgem.jeesite.modules.sub.entity.PQianggou" parameterType="com.thinkgem.jeesite.modules.sub.entity.LimitEntity">
 		SELECT 
 			<include refid="pQianggouColumns"/>
-		FROM p_qianggou a limit #{page},20
+		FROM p_qianggou a limit #{page},#{pageSize}
 	</select>
 	
 	<select id="findListByTitle" resultType="com.thinkgem.jeesite.modules.sub.entity.PQianggou" parameterType="com.thinkgem.jeesite.modules.sub.entity.LimitEntity">

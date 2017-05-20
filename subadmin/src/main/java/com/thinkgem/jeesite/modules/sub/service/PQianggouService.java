@@ -23,9 +23,10 @@ public class PQianggouService {
 		return pQianggouDao.get(numiid);
 	}
 	
-	public List<PQianggou> findList(String page){
+	public List<PQianggou> findList(String page,Integer pageSize){
 		LimitEntity le=new LimitEntity();
 		le.setPage(Integer.parseInt(page));
+		le.setPageSize(pageSize);
 		return pQianggouDao.findList(le);
 	}
 	

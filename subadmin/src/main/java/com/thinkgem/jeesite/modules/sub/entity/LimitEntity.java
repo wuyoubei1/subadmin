@@ -9,6 +9,8 @@ public class LimitEntity {
 
 	private String title;
 	private int page;
+	/**每页条数**/
+	private int pageSize=20;
 	public String getTitle() {
 		return title;
 	}
@@ -28,7 +30,15 @@ public class LimitEntity {
 	}
 	public LimitEntity() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		if(0==pageSize){
+			pageSize=20;
+		}
+		this.pageSize = pageSize;
 	}
 	
 }

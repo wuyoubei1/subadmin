@@ -33,9 +33,12 @@ public class YhcxController {
 	 */
 	@RequestMapping(value="data")
 	@ResponseBody
-	public String getData(@RequestParam String key,@RequestParam String page){
+	public String getData(@RequestParam String key,@RequestParam String page,Integer pageSize){
 		if(page==null||page==""||Integer.parseInt(page)<=0){
 			page=1+"";
+		}
+		if(null==pageSize){
+			pageSize=20;
 		}
 		List<YouHuiQuan> list =new ArrayList<YouHuiQuan>();
 		ObjectMapper om=new ObjectMapper();
@@ -48,7 +51,7 @@ public class YhcxController {
 				list=youHuiQuanService.getListByTitle(key, page);
 			}
 		}else{
-			list=youHuiQuanService.getList(page);
+			list=youHuiQuanService.getList(page,pageSize);
 		}
 		try {
 			data=om.writeValueAsString(list);
