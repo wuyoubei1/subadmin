@@ -20,10 +20,10 @@ public class YouHuiQuanService {
 	@Autowired
 	private YouHuiQuanDao youHuiQuanDao;
 	public List<YouHuiQuan> getList(String page,int pageSize){
-		LimitEntity le=new LimitEntity();
-		le.setPage(Integer.parseInt(page));
-		le.setPageSize(pageSize);
-		return youHuiQuanDao.getList(le);
+		LimitEntity limit=new LimitEntity();
+		limit.setPage(Integer.parseInt(page));
+		limit.setPageSize(pageSize);
+		return youHuiQuanDao.getList(limit);
 	}
 	
 	public List<YouHuiQuan> getByGoodsId(String goodsId){
@@ -31,7 +31,23 @@ public class YouHuiQuanService {
 	}
 	
 	public List<YouHuiQuan> getListByTitle(String title,String page){
-		LimitEntity le=new LimitEntity(title, Integer.parseInt(page));
-		return youHuiQuanDao.getListByTitle(le);
+		LimitEntity limit=new LimitEntity(title, Integer.parseInt(page));
+		return youHuiQuanDao.getListByTitle(limit);
+	}
+
+	public List<YouHuiQuan> getListSort(String key, String page, String sort) {
+		LimitEntity limit=new LimitEntity();
+		limit.setPage(Integer.parseInt(page));
+		limit.setTitle(key);
+		if("1".equals(sort)){
+			limit.setSort("quan_surplus");
+		}else if("2".equals(sort)){
+			limit.setSort("quan_time desc");
+		}else if("3".equals(sort)){
+			limit.setSort("salesNum");
+		}else if("4".equals(sort)){
+			limit.setSort("orgPrice");
+		}
+		return youHuiQuanDao.getListSort(limit);
 	}
 }

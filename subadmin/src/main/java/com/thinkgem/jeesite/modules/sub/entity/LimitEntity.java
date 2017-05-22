@@ -9,6 +9,13 @@ public class LimitEntity {
 
 	private String title;
 	private int page;
+	private String sort; //排序字段
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
 	/**每页条数**/
 	private int pageSize=20;
 	public String getTitle() {
