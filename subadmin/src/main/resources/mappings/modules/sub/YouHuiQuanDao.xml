@@ -32,6 +32,6 @@
 	</select>
 	<!-- 获取列表数据 -->
 	<select id="getList" resultType="com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan" parameterType="com.thinkgem.jeesite.modules.sub.entity.LimitEntity">
-		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where a.quan_surplus>5 LIMIT #{page},20
+		select <include refid="youHuiQuanColumns"/> from p_youhuiquan a where a.quan_surplus>5 LIMIT #{page},#{pageSize}
 	</select>
 </mapper>
