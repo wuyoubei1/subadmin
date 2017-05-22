@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.sub.dao.P_CategoryDao">
+
+	<sql id="PCategoryColumns">
+		a.type as "type",
+		a.id as "id",
+		a.name as "name",
+		a.url as "url",
+		a.remark as "remark",
+		a.parent as "parent",
+		a.level as "level" 
+	</sql>
+	
+	<select id="getClassify" resultType="com.thinkgem.jeesite.modules.sub.entity.P_Category">
+		select a.name from p_category a where INSTR(#{str},a.name) 
+	</select>
+</mapper>

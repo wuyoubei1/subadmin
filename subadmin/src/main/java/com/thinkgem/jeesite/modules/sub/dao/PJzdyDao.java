@@ -16,4 +16,5 @@ public interface PJzdyDao {
 	public void insert(PJzdy pJzdy);
 	
 	public List<PJzdy> findList(PJzdy pJzdy);
+
 }

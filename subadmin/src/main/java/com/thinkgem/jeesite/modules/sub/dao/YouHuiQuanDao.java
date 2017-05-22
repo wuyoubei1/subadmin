@@ -21,4 +21,6 @@ public interface YouHuiQuanDao {
 	public List<YouHuiQuan> getList(LimitEntity limit);
 	
 	public List<YouHuiQuan> getListByTitle(LimitEntity limit);
+
+	public List<YouHuiQuan> getListSort(LimitEntity limit);
 }
