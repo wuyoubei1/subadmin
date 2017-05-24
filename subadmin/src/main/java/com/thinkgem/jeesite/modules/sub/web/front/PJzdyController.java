@@ -114,11 +114,11 @@ public class PJzdyController {
 		if("".equals(data)){
 			//仍然没有查到结果，根据关键词分类查询
 			if(str!=null&&!"".equals(str)){
-				try {
-					str=new String(str.getBytes("iso-8859-1"),"utf-8");
-				} catch (UnsupportedEncodingException e1) {
-					e1.printStackTrace();
-				}
+//				try {
+//					str=new String(str.getBytes("iso-8859-1"),"utf-8");
+//				} catch (UnsupportedEncodingException e1) {
+//					e1.printStackTrace();
+//				}
 				List<YouHuiQuan> result=new ArrayList<>();
 				List<YouHuiQuan> yhq=null;
 				List<P_Category> fenlei=pJzdyService.getClassify(str);
