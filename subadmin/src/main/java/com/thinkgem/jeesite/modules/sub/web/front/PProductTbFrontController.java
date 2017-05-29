@@ -31,6 +31,7 @@ import com.thinkgem.jeesite.modules.sub.entity.AccessLog;
 import com.thinkgem.jeesite.modules.sub.entity.PProductTb;
 import com.thinkgem.jeesite.modules.sub.service.AccessLogService;
 import com.thinkgem.jeesite.modules.sub.service.PProductTbService;
+import com.thinkgem.jeesite.modules.sub.util.Common;
 
 /**
  * 商品表Controller
@@ -42,17 +43,8 @@ import com.thinkgem.jeesite.modules.sub.service.PProductTbService;
 @RequestMapping(value = "${frontPath}/sub/pTb")
 public class PProductTbFrontController extends BaseController {
 
-	public static String url="http://gw.api.taobao.com/router/rest"; 
 	
-	public static String appkey="23760845";
-	
-	public static String secret="e5cf5879a13d0c453c3bb1a9bff4b861";
-	
-	public static Long adzoneId=80460157L;
-	
-	public static String pid="mm_10221473_23986300_80460157";
-	
-	private TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+	private TaobaoClient client = new DefaultTaobaoClient(Common.url, Common.appkey, Common.secret);
 
 	@Autowired
 	private PProductTbService pProductTbService;
@@ -179,7 +171,7 @@ public class PProductTbFrontController extends BaseController {
 		
 		ObjectMapper om = new ObjectMapper();
 		String json = "";
-		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+		TaobaoClient client = new DefaultTaobaoClient(Common.url, Common.appkey, Common.secret);
 		//req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
 		req.setPlatform(1L);
 		try {
@@ -208,7 +200,7 @@ public class PProductTbFrontController extends BaseController {
 			e3.printStackTrace();
 		}
 		String json = "";
-		req.setAdzoneId(adzoneId);
+		req.setAdzoneId(Common.adzoneId);
 		req.setFields("click_url,pic_url,reserve_price,zk_final_price,total_amount,sold_num,title,category_name,start_time,end_time");
 		req.setPageSize(40L);
 		TbkJuTqgGetResponse rsp;
@@ -232,11 +224,11 @@ public class PProductTbFrontController extends BaseController {
 			e3.printStackTrace();
 		}
 		String json = "";
-		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+		TaobaoClient client = new DefaultTaobaoClient(Common.url, Common.appkey, Common.secret);
 		JuItemsSearchRequest req = new JuItemsSearchRequest();
 		itemQuery.setCurrentPage(1L);
 		itemQuery.setPageSize(20L);
-		itemQuery.setPid(pid);
+		itemQuery.setPid(Common.pid);
 		itemQuery.setPostage(true);
 		itemQuery.setStatus(2L);
 		//obj1.setTaobaoCategoryId(1000L);

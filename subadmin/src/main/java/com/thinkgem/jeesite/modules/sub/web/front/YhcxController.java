@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thinkgem.jeesite.modules.sub.entity.YouHuiQuan;
 import com.thinkgem.jeesite.modules.sub.service.YouHuiQuanService;
+import com.thinkgem.jeesite.modules.sub.util.Common;
 
 /**
 * 优惠查询controller
@@ -41,11 +42,14 @@ public class YhcxController {
 			pageSize=20;
 		}
 		List<YouHuiQuan> list =new ArrayList<YouHuiQuan>();
+		YouHuiQuan bean=new YouHuiQuan();
 		ObjectMapper om=new ObjectMapper();
 		String data="";
 		if(null!=key&&!"".equals(key)){//没有关键字或id
 			if(key.matches("^[0-9]*[1-9][0-9]*$")&&15>key.length()&&key.length()>8){//为数字并且位数小于15大于8，认为是商品id
 				list=youHuiQuanService.getByGoodsId(key);
+				bean=list.get(0);
+				list.get(0).setQuanLink("http://uland.taobao.com/coupon/edetail?activityId="+bean.getQuanId()+"&pid="+Common.pid+"&itemId="+bean.getGoodsId());
 			}else{
 				//关键字
 				list=youHuiQuanService.getListByTitle(key, page);
