@@ -115,16 +115,33 @@ public class PProductTbFrontController extends BaseController {
 	@RequestMapping("spsx")
 	@ResponseBody
 	public String spsx(HttpServletRequest request, TbkItemGetRequest req) {
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e3) {
-			e3.printStackTrace();
-		}
+		String q=request.getParameter("q");
+		System.out.println("|"+q);
+		TaobaoClient client = new DefaultTaobaoClient(Common.url, Common.appkey, Common.secret);
+		req.setFields("click_urlnum_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
+		req.setQ(q);
+		req.setPlatform(2L);
+		
+		System.out.println("搜索关键字："+req.getQ()+"|"+req.getPageNo());
+//		try {
+//			request.setCharacterEncoding("UTF-8");
+//		} catch (UnsupportedEncodingException e3) {
+//			e3.printStackTrace();
+//		}
 		String json = "";
 		ObjectMapper om = new ObjectMapper();
 		req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
 		req.setPageSize(Long.parseLong("20"));
 		TbkItemGetResponse rsp;
+		try {
+			rsp = client.execute(req);
+			System.out.println(rsp.getBody());
+			json = om.writeValueAsString(rsp);
+		} catch (ApiException e1) {
+			e1.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		AccessLog accessLog = new AccessLog();
 		accessLog.setAccessTime(DateUtils.getDate());
 		accessLog.setMethod(this.getClass().getName());
@@ -141,16 +158,19 @@ public class PProductTbFrontController extends BaseController {
 		accessLog.setRemark("测试数据");
 		accessLog.setParam(request.toString());
 		accessLogService.logForTable(request, accessLog);
-		try {
-			rsp = client.execute(req);
-			System.out.println(rsp.getBody());
-			json = om.writeValueAsString(rsp);
-		} catch (ApiException e1) {
-			e1.printStackTrace();
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+		
 		return json;
+	}
+	
+	public static void main(String[] args){
+		PProductTbFrontController dd=new PProductTbFrontController();
+		TbkItemGetRequest req = new TbkItemGetRequest();
+		req.setFields("click_urlnum_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
+		req.setQ("小米");
+		req.setPlatform(2L);
+		req.setPageNo(1L);
+		req.setPageSize(5L);
+		dd.spsx(null, req);
 	}
 	
 	/**

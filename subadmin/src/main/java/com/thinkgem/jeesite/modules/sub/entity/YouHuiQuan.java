@@ -51,6 +51,7 @@ public class YouHuiQuan {
 	private int type;
 	/***优惠券剩余数量**/
 	private int quanSurplus;
+	private String quanId;
 	/***结束时间**/
 	private Date quanTime;
 	public int getId() {
@@ -227,6 +228,14 @@ public class YouHuiQuan {
 
 	public void setQuanTime(Date quanTime) {
 		this.quanTime = quanTime;
+	}
+
+	public String getQuanId() {
+		return quanId;
+	}
+
+	public void setQuanId(String quanId) {
+		this.quanId = quanId;
 	}
 	
 	
